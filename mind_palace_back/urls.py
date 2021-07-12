@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/v1/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/v1/account/', include('mind_palace_back.account.urls')),
+    path('api/v1/palace/', include('mind_palace_back.palace.node.urls')),
     path('api/v1/palace/', include('mind_palace_back.palace.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \

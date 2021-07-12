@@ -12,8 +12,8 @@ class UserSignUpCredentialsSerializer(serializers.Serializer):
         return models.User.objects.create_user(**validated_data)
 
 
-class UserAccountSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.UserAccount
+        model = models.User
         fields = '__all__'

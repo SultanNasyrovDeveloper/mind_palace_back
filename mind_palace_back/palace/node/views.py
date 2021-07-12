@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from mind_palace_back.palace.node import models, serializers
+
+
+class MindPalaceNodeViewSet(viewsets.ModelViewSet):
+
+    queryset = models.MindPalaceNode.objects.all()
+    serializer_class = serializers.MindPalaceNodeSerializer

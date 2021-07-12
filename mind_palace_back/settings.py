@@ -2,12 +2,14 @@ from pathlib import Path
 from datetime import timedelta
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-ya*p^u73z6(s##*w#emo^%7w#_+ubb+y9qx3ov7ti@w$talz(i'
 DEBUG = True
+SECRET_KEY = 'django-insecure-ya*p^u73z6(s##*w#emo^%7w#_+ubb+y9qx3ov7ti@w$talz(i'
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 ALLOWED_HOSTS = ['*']
-AUTH_USER_MODEL = 'account.User'
 CORS_ORIGIN_ALLOW_ALL = True
+AUTH_USER_MODEL = 'account.User'
+CSRF_COOKIE_SECURE = False
 
 
 INSTALLED_APPS = [
@@ -19,6 +21,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'mptt',
 
     'mind_palace_back.account',
     'mind_palace_back.palace',
@@ -31,11 +34,27 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 20
+}
+
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
@@ -84,7 +103,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'mind_palace_back.wsgi.application'
-APPEND_SLASH = True
+
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
