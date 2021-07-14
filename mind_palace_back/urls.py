@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/v1/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
+    path('api/v1/application/', include('mind_palace_back.application.urls')),
     path('api/v1/account/', include('mind_palace_back.account.urls')),
     path('api/v1/palace/', include('mind_palace_back.palace.node.urls')),
     path('api/v1/palace/', include('mind_palace_back.palace.urls'))

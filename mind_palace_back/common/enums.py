@@ -33,7 +33,7 @@ class DjangoChoicesEnum:
             enum class where first value is attribute value and second is attribute name.
         """
         return tuple([
-            (attribute_name, getattr(cls, attribute_name))
+            (getattr(cls, attribute_name), attribute_name)
             for attribute_name in dir(cls)
             if not attribute_name.startswith('__') and not inspect.ismethod(
                 getattr(cls, attribute_name)

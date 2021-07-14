@@ -23,9 +23,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'mptt',
 
+    'mind_palace_back.application',
     'mind_palace_back.account',
     'mind_palace_back.palace',
     'mind_palace_back.palace.node',
+    'mind_palace_back.learning',
+    'mind_palace_back.learning.stats',
+    'mind_palace_back.learning.session',
+
 
 ]
 

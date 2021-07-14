@@ -25,8 +25,8 @@ class UserMindPalaceViewSet(ModelViewSet):
             raise ValidationError('Root must be specified.')
         depth = request.GET.get('depth', 3)
         root_node = MindPalaceNode.objects.get(id=root_id)
-        cached_tree_root = MindPalaceNode.objects.filter(
-            level__gte=root_node.level, level__lt=root_node.level + int(depth),
+        cached_tree_root = root_node.get_descendants(include_self=True).filter(
+            level__lt=root_node.level + int(depth)
         ).get_cached_trees()[0]
         serializer = MindPalaceTreeNodeSerializer(cached_tree_root)
         return Response(serializer.data)
