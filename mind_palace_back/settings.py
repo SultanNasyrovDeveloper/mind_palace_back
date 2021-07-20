@@ -10,6 +10,7 @@ ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
 AUTH_USER_MODEL = 'account.User'
 CSRF_COOKIE_SECURE = False
+APPEND_SLASH = True
 
 
 INSTALLED_APPS = [
@@ -30,8 +31,6 @@ INSTALLED_APPS = [
     'mind_palace_back.learning',
     'mind_palace_back.learning.stats',
     'mind_palace_back.learning.session',
-
-
 ]
 
 MIDDLEWARE = [

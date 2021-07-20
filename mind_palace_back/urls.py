@@ -16,7 +16,9 @@ urlpatterns = [
     path('api/v1/application/', include('mind_palace_back.application.urls')),
     path('api/v1/account/', include('mind_palace_back.account.urls')),
     path('api/v1/palace/', include('mind_palace_back.palace.node.urls')),
-    path('api/v1/palace/', include('mind_palace_back.palace.urls'))
+    path('api/v1/palace/', include('mind_palace_back.palace.urls')),
+    path('api/v1/learning/sessions/', include('mind_palace_back.learning.session.urls')),
+    path('api/v1/learning/', include('mind_palace_back.learning.urls'))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

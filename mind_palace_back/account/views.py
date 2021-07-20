@@ -8,6 +8,8 @@ from mind_palace_back.account import serializers, models
 
 class SignUpView(views.APIView):
 
+    permission_classes = []
+
     def post(self, request, *args, **kwargs):
         user_serializer = serializers.UserSignUpCredentialsSerializer(data=request.data)
         user_serializer.is_valid(raise_exception=True)

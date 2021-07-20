@@ -1,4 +1,4 @@
-from mind_palace_back.common.enums import DjangoChoicesEnum
+from mind_palace_back.application.enums import DjangoChoicesEnum
 
 
 class NodeBodyTypeEnum(DjangoChoicesEnum):

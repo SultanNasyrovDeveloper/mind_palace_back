@@ -3,6 +3,11 @@ import inspect
 
 class DjangoChoicesEnum:
 
+    # TODO: Move object attr_name/value iteration to separate method.
+    @classmethod
+    def contains(cls, item: str):
+        return item in cls.values()
+
     @classmethod
     def keys(cls):
         return [
