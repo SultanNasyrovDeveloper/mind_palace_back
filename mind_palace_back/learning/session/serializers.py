@@ -15,10 +15,11 @@ class UserLearningSessionSerializer(serializers.ModelSerializer):
         model = models.UserLearningSession
         fields = (
             'id', 'status', 'start_datetime', 'finish_datetime', 'last_repetition_datetime', 'root',
-            'strategy_name', 'user',
+            'strategy_name', 'user', 'queue'
         )
         read_only_fields = (
-            'id', 'status', 'start_datetime', 'finish_datetime', 'last_repetition_datetime', 'user'
+            'id', 'status', 'start_datetime', 'finish_datetime', 'last_repetition_datetime', 'user',
+            'queue'
         )
 
 

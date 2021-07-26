@@ -33,6 +33,10 @@ INSTALLED_APPS = [
     'mind_palace_back.learning.session',
 ]
 
+
+# APPLICATION SETTING
+USER_LEARNING_SESSION_EXPIRE = 30  # Currently in minutes
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

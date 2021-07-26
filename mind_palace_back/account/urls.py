@@ -5,7 +5,7 @@ from mind_palace_back.account import views
 
 
 router = routers.DefaultRouter()
-router.register('', views.UserViewSet)
+router.register('users', views.UserViewSet)
 
 urlpatterns = [
     path('signup', views.SignUpView.as_view()),
