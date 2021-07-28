@@ -9,7 +9,7 @@ from mind_palace_back.palace.node.models import MindPalaceNode
 
 class NodeLearningStatistics(models.Model):
 
-    node = models.ForeignKey(
+    node = models.OneToOneField(
         'node.MindPalaceNode', on_delete=models.CASCADE, related_name='learning_statistics',
     )
 

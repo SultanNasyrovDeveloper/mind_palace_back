@@ -26,6 +26,7 @@ class MindPalaceNodeSerializer(serializers.ModelSerializer):
     Provide full mind palace node information.
     """
     ancestors = serializers.SerializerMethodField(read_only=True)
+    learning_statistics = serializers.PrimaryKeyRelatedField(read_only=True)
     tags = NoteTagSerializer(many=True, allow_null=True, default=list, read_only=True)
 
     class Meta:
