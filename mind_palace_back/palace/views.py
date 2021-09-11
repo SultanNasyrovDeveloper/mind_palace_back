@@ -5,6 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 
 
 from mind_palace_back.palace import models, serializers
+from mind_palace_back.palace.node.filters import MindPalaceNodeFilter
 from mind_palace_back.palace.node.models import MindPalaceNode
 from mind_palace_back.palace.node.serializers import MindPalaceTreeNodeSerializer
 
@@ -13,6 +14,7 @@ class UserMindPalaceViewSet(ModelViewSet):
 
     queryset = models.UserMindPalace.objects.all()
     serializer_class = serializers.UserMindPalaceSerializer
+    filterset_class = MindPalaceNodeFilter
 
     @action(detail=False, methods=('GET', ))
     def my_palace(self, request, *args, **kwargs):

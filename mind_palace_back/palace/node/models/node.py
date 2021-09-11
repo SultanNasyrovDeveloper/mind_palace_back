@@ -15,3 +15,9 @@ class MindPalaceNode(BaseMindPalaceNode):
         default=NodeBodyTypeEnum.TEXT,
     )
     body = models.JSONField('Body', default=dict)
+
+    def get_owner_id(self):
+        root_node = self
+        if not self.is_root_node():
+            root_node = self.get_root()
+        return root_node.mind_palace.user_id

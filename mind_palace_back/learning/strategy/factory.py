@@ -1,6 +1,7 @@
 from mind_palace_back.learning.strategy.enums import MindPalaceLearningStrategiesEnum
 from mind_palace_back.learning.strategy.supermemo2 import SuperMemo2LearningStrategy
 
+# TODO: Autodiscover
 strategies_map = {
     MindPalaceLearningStrategiesEnum.supermemo_2: SuperMemo2LearningStrategy
 }

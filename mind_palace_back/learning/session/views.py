@@ -8,6 +8,8 @@ from mind_palace_back.learning.session.enums import UserLearningSessionStatusEnu
 
 class LearningSessionViewSet(ModelViewSet):
 
+    # TODO: Add permission to user actions
+
     queryset = models.UserLearningSession.objects.all()
     serializer_class = serializers.UserLearningSessionSerializer
 
@@ -49,13 +51,6 @@ class LearningSessionViewSet(ModelViewSet):
         """
         return Response(self.get_object().get_current_node_id())
 
-    @action(detail=True, methods=('GET', ))
-    def next(self, request, *args, **kwargs):
-        """
-        Retrieve next node to learn.
-        """
-        return Response(self.get_object().get_next_node_id())
-
     @action(detail=True, methods=('POST', ))
     def study_node(self, request, *args, **kwargs):
         """
@@ -69,6 +64,9 @@ class LearningSessionViewSet(ModelViewSet):
 
     @action(detail=True, methods=('POST',))
     def finish(self, request, *args, **kwargs):
+        """
+        Finish session.
+        """
         session = models.UserLearningSession.objects.finish(self.get_object())
         return Response(
             serializers.UserLearningSessionSerializer(session).data

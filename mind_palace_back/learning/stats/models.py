@@ -19,6 +19,7 @@ class NodeLearningStatistics(models.Model):
     )
     interval = models.IntegerField(default=0)
     repetitions = models.BigIntegerField(default=0)
+    views = models.BigIntegerField(default=0)
     positive_repetitions_in_row = models.BigIntegerField(default=0)
     easiness = models.DecimalField(max_digits=4, decimal_places=2, default=2.6)
     average_rate = models.DecimalField(max_digits=2, decimal_places=1, default=0)

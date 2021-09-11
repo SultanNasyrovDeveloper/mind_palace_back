@@ -56,3 +56,7 @@ class MindPalaceTreeNodeSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
     children = serializers.ListField(child=RecursiveField(), source='get_children')
+
+
+class MindPalaceNodeAddMediaDataSerializer(serializers.Serializer):
+    pass

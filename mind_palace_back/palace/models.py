@@ -10,6 +10,7 @@ class BaseMindPalace(models.Model):
 
     root = models.OneToOneField(
         'node.MindPalaceNode', on_delete=models.SET_DEFAULT, default=None, null=True, blank=True,
+        related_name='mind_palace'
     )
 
     class Meta:

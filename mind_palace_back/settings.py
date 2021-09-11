@@ -23,6 +23,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'mptt',
+    'django_filters',
 
     'mind_palace_back.application',
     'mind_palace_back.account',
