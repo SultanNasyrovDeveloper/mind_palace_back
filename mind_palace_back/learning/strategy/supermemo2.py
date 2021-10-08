@@ -1,3 +1,5 @@
+import random
+
 from decimal import Decimal
 from datetime import datetime, timedelta
 
@@ -7,9 +9,11 @@ from mind_palace_back.learning.strategy.base import BaseLearningStrategy
 class SuperMemo2LearningStrategy(BaseLearningStrategy):
 
     def generate_learning_queue(self, root_node):
-        return list(root_node.get_descendants(include_self=True).order_by(
+        queue = list(root_node.get_descendants(include_self=True).order_by(
             'learning_statistics__next_repetition'
         ).values_list('id', flat=True))
+        random.shuffle(queue)
+        return queue
 
     def study_node(self, node_learning_stats, rating):
         """
