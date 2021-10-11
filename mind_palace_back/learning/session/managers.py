@@ -40,6 +40,9 @@ class UserLearningSessionManager(models.Manager):
         """
         Finish given session.
         """
+        if not session.repeated_nodes:
+            session.delete()
+            return
         session.queue = []
         session.finish_datetime = datetime.utcnow()
         session.status = UserLearningSessionStatusEnum.finished
