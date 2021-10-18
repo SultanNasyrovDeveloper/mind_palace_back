@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'mind_palace_back.learning',
     'mind_palace_back.learning.stats',
     'mind_palace_back.learning.session',
+    # 'mind_palace_back.learning.node_config',
 ]
 
 
