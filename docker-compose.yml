@@ -1,17 +1,17 @@
-service:
+version: "3.3"
+services:
   db:
     image: postgres
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=mind_palace
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-
   web:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     ports:
-      - "8000:8000"
+      - "8003:8000"
     depends_on:
       - db

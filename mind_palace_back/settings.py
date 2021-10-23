@@ -121,10 +121,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'mind_palace',
-        'HOST': 'localhost',
-        'PORT': '',
-        'USER': 'developer',
-        'PASSWORD': '123456'
+        'HOST': 'db',
+        'PORT': 5432,
+        'USER': 'postgres',
+        'PASSWORD': 'postgres'
     }
 }
 
