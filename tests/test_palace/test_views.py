@@ -1,6 +1,6 @@
 import pytest
 
-from mind_palace_back.palace.node.models import MindPalaceNode
+from mind_palace.palace.node.models import MindPalaceNode
 
 
 @pytest.mark.django_db
