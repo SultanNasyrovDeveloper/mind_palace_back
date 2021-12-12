@@ -5,6 +5,13 @@ from mind_palace.palace.node import models
 from mind_palace.learning.stats.serializers import UserLearningStatisticsSerializer
 
 
+class NodeMediaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.MindPalaceNodeMedia
+        exclude = ('image', )
+
+
 class NoteTagSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -28,7 +35,11 @@ class MindPalaceNodeSerializer(serializers.ModelSerializer):
     """
     ancestors = serializers.SerializerMethodField(read_only=True)
     learning_statistics = serializers.PrimaryKeyRelatedField(read_only=True)
+    # TODO: Refactor NoteTagSerializer init params
     tags = NoteTagSerializer(many=True, allow_null=True, default=list, read_only=True)
+
+    # TODO: make media on expand or at other endpoint,
+    media = NodeMediaSerializer(many=True, read_only=True)
 
     class Meta:
         model = models.MindPalaceNode
@@ -58,7 +69,3 @@ class MindPalaceTreeNodeSerializer(serializers.Serializer):
     name = serializers.CharField()
     children = serializers.ListField(child=RecursiveField(), source='get_children')
     learning_statistics = UserLearningStatisticsSerializer(read_only=True)
-
-
-class MindPalaceNodeAddMediaDataSerializer(serializers.Serializer):
-    pass

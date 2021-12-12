@@ -15,7 +15,10 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
     def has_permission(self, request, view, obj):
         return True
 
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request, pk=None, *args, **kwargs):
+        """
+        Updates node views everytime use sees its own node.
+        """
         if not pk:
             return super().retrieve(request)
         node = get_object_or_404(models.MindPalaceNode, pk=pk)
@@ -27,8 +30,19 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
     @action(
         detail=True,
         methods=('POST', ),
-        serializer_class=serializers.MindPalaceNodeAddMediaDataSerializer,
+        serializer_class=serializers.NodeMediaSerializer,
     )
     def add_media(self, request, *args, **kwargs):
-        return Response({})
+        request_data = dict(request.data)
+        request_data['node'] = self.get_object().id
+        serializer = self.get_serializer_class()(data=request_data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
+    @action(
+        detail=True,
+        methods=('GET',),
+    )
+    def children(self, request, *args, **kwargs):
+        return Response({})
