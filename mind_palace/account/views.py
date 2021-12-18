@@ -17,7 +17,7 @@ class SignUpView(views.APIView):
             user_serializer.save()
         except Exception as e:
             raise ValidationError(str(e))
-        return Response({'status': 201})
+        return Response({'Created': True}, status=201)
 
 
 class UserViewSet(viewsets.ModelViewSet):
