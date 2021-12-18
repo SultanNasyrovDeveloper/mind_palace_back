@@ -10,6 +10,6 @@ RUN apt-get update && apt-get upgrade
 
 # install application requirements
 WORKDIR /app
-COPY requirements.txt /app/
+COPY backend/requirements.txt /app/
 RUN pip install -r requirements.txt
-COPY . /app
+COPY /backend /app
