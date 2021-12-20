@@ -10,16 +10,17 @@ class UserLearningSessionSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     root = serializers.PrimaryKeyRelatedField(queryset=MindPalaceNode.objects.all())
     strategy_name = serializers.ChoiceField(choices=MindPalaceLearningStrategiesEnum.choices())
+    current = serializers.IntegerField(source='get_current_node_id', read_only=True)
 
     class Meta:
         model = models.UserLearningSession
         fields = (
             'id', 'status', 'start_datetime', 'finish_datetime', 'last_repetition_datetime', 'root',
-            'strategy_name', 'user', 'queue'
+            'strategy_name', 'user', 'queue', 'current'
         )
         read_only_fields = (
             'id', 'status', 'start_datetime', 'finish_datetime', 'last_repetition_datetime', 'user',
-            'queue'
+            'queue', 'current'
         )
 
 

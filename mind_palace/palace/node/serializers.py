@@ -34,10 +34,9 @@ class MindPalaceNodeSerializer(serializers.ModelSerializer):
     Provide full mind palace node information.
     """
     ancestors = serializers.SerializerMethodField(read_only=True)
-    learning_statistics = serializers.PrimaryKeyRelatedField(read_only=True)
     # TODO: Refactor NoteTagSerializer init params
     tags = NoteTagSerializer(many=True, allow_null=True, default=list, read_only=True)
-
+    learning_statistics = UserLearningStatisticsSerializer(read_only=True)
     # TODO: make media on expand or at other endpoint,
     media = NodeMediaSerializer(many=True, read_only=True)
 
