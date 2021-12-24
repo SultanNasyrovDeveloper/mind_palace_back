@@ -1,0 +1,16 @@
+FROM python:3.8
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+ENV DJANGO_SETTINGS_MODULE=mind_palace.settings
+
+RUN apt-get update && apt-get upgrade
+
+WORKDIR /app
+
+COPY requirements.txt /app/
+RUN pip install -r requirements.txt
+
+VOLUME . .
+
+EXPOSE 8000
