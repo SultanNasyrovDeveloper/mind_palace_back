@@ -55,7 +55,9 @@ class SuperMemo2LearningStrategy(BaseLearningStrategy):
             node_learning_stats.positive_repetitions_in_row += 1
 
         node_learning_stats.next_repetition = (
-                node_learning_stats.last_repetition + timedelta(days=node_learning_stats.interval)
+                node_learning_stats.last_repetition + timedelta(
+                    days=float(node_learning_stats.interval)
+                )
         )
         node_learning_stats.last_repetition = datetime.utcnow()
         node_learning_stats.average_rate = (
