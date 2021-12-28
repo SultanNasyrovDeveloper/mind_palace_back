@@ -6,7 +6,7 @@ class NodeBodyTypeEnum(DjangoChoicesEnum):
     TEXT = 'text'
     CODE = 'code'
     CHESS = 'chess'
-    # TRANSLATION = 'translation'
+    TRANSLATION = 'translation'
     # MICROEXPRESSION = 'microexpression'
     # BIOGRAPHY = 'biography'
     # HISTORICAL_EVENT = 'historical_event'
