@@ -60,7 +60,11 @@ class LearningSessionViewSet(ModelViewSet):
         serializer = serializers.NodeStudyDataSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         models.UserLearningSession.objects.study_node(session, **serializer.validated_data)
-        return Response({'status': 200, 'next': session.get_current_node_id()})
+        return Response({
+            'status': 200,
+            'next': session.get_current_node_id(),
+            'session': self.serializer_class(session).data
+        })
 
     @action(detail=True, methods=('POST',))
     def finish(self, request, *args, **kwargs):
