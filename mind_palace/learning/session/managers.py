@@ -30,6 +30,12 @@ class UserLearningSessionManager(models.Manager):
         node_id = kwargs.pop('node')
         node_learning_stats = NodeLearningStatistics.objects.get(node_id=node_id)
         session.get_strategy().study_node(node_learning_stats, **kwargs)
+        session.total_repetitions += 1
+        session.average_rating = (
+            (session.average_rating * (session.total_repetitions - 1) + kwargs.get('rating'))
+            / session.total_repetitions
+        )
+        session.average_rating = round(session.average_rating, 1)
         session.last_repetition_datetime = datetime.utcnow()
         session.remove_node_from_queue(node_id)
         session.add_repeated_node(node_id)

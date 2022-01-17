@@ -13,7 +13,7 @@ class UserLearningSession(models.Model):
     """
     User learning session.
     """
-
+    # basic
     status = models.CharField(
         max_length=100, choices=UserLearningSessionStatusEnum.choices(),
         default=UserLearningSessionStatusEnum.active,
@@ -26,10 +26,16 @@ class UserLearningSession(models.Model):
         default=MindPalaceLearningStrategiesEnum.supermemo_2,
     )
 
+    # nodes
     root = models.ForeignKey('node.MindPalaceNode', on_delete=models.CASCADE)
     queue = ArrayField(models.IntegerField(), default=list)
+
+    # statistics
+    average_rating = models.FloatField(default=0)
+    total_repetitions = models.PositiveSmallIntegerField(default=0)
     repeated_nodes = ArrayField(models.IntegerField(), default=list)
 
+    # timemarks
     start_datetime = models.DateTimeField(default=datetime.utcnow)
     finish_datetime = models.DateTimeField(null=True, default=None)
     last_repetition_datetime = models.DateTimeField(default=datetime.utcnow)
