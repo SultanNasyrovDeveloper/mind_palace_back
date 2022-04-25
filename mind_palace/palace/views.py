@@ -14,7 +14,6 @@ class UserMindPalaceViewSet(ModelViewSet):
 
     queryset = models.UserMindPalace.objects.all()
     serializer_class = serializers.UserMindPalaceSerializer
-    filterset_class = MindPalaceNodeFilter
 
     @action(detail=False, methods=('GET', ))
     def my_palace(self, request, *args, **kwargs):

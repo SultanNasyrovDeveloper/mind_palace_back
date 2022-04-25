@@ -39,7 +39,7 @@ class MindPalaceNodeSerializer(serializers.ModelSerializer):
     learning_statistics = UserLearningStatisticsSerializer(read_only=True)
     # TODO: make media on expand or at other endpoint,
     media = NodeMediaSerializer(many=True, read_only=True)
-    children = serializers.ListField(child=RecursiveField(), source='get_children', read_only=True)
+    # children = serializers.ListField(child=RecursiveField(), source='get_children', read_only=True)
 
     class Meta:
         model = models.MindPalaceNode

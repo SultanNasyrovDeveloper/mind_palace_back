@@ -7,4 +7,6 @@ from mind_palace.palace.node.enums import NodeBodyTypeEnum
 class EnumsApiView(APIView):
 
     def get(self, request, *args, **kwargs):
-        return Response({'node_body_types': NodeBodyTypeEnum.choices()})
+        return Response(
+            {'node_body_types': NodeBodyTypeEnum.choices()}
+        )

@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
-from mind_palace.palace.node import models, serializers
+from mind_palace.palace.node import models, serializers, filters
 from mind_palace.learning.stats.models import NodeLearningStatistics
 
 
@@ -12,6 +12,7 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
 
     queryset = models.MindPalaceNode.objects.all()
     serializer_class = serializers.MindPalaceNodeSerializer
+    filterset_class = filters.MindPalaceNodeFilter
 
     def has_permission(self, request, view, obj):
         return True
