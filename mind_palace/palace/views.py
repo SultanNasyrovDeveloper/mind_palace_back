@@ -16,10 +16,6 @@ class UserMindPalaceViewSet(ModelViewSet):
     serializer_class = serializers.UserMindPalaceSerializer
 
     @action(detail=False, methods=('GET', ))
-    def my_palace(self, request, *args, **kwargs):
-        return self.serializer_class(request.user.mypalace).data
-
-    @action(detail=False, methods=('GET', ))
     def tree(self, request, *args, **kwargs):
         root_id = request.GET.get('root', None)
         if not root_id:
