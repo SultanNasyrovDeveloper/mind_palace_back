@@ -14,9 +14,6 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.MindPalaceNodeSerializer
     filterset_class = filters.MindPalaceNodeFilter
 
-    def has_permission(self, request, view, obj):
-        return True
-
     def retrieve(self, request, pk=None, *args, **kwargs):
         """
         Updates node views everytime use sees its own node.
@@ -54,10 +51,3 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data)
-
-    @action(
-        detail=True,
-        methods=('GET',),
-    )
-    def children(self, request, *args, **kwargs):
-        return Response({})

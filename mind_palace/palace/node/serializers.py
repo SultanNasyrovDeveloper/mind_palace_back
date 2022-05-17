@@ -35,15 +35,18 @@ class MindPalaceNodeSerializer(serializers.ModelSerializer):
     """
     ancestors = serializers.SerializerMethodField(read_only=True)
     # TODO: Refactor NoteTagSerializer init params
-    tags = NoteTagSerializer(many=True, allow_null=True, default=list, read_only=True)
+    # tags = NoteTagSerializer(many=True, allow_null=True, default=list, read_only=True)
     learning_statistics = UserLearningStatisticsSerializer(read_only=True)
     # TODO: make media on expand or at other endpoint,
     media = NodeMediaSerializer(many=True, read_only=True)
-    # children = serializers.ListField(child=RecursiveField(), source='get_children', read_only=True)
 
     class Meta:
         model = models.MindPalaceNode
-        fields = '__all__'
+        fields = (
+            'id', 'ancestors', 'learning_statistics', 'media', 'name', 'title', 'body_type',
+            'body', 'children', 'parent'
+        )
+        read_only_fields = ('children', )
 
     def get_ancestors(self, neuron):
         """

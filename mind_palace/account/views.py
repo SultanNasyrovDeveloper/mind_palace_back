@@ -2,13 +2,14 @@ from rest_framework import views, viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 
 from mind_palace.account import serializers, models
 
 
 class SignUpView(views.APIView):
 
-    permission_classes = []
+    permission_classes = [AllowAny]
 
     def post(self, request, *args, **kwargs):
         user_serializer = serializers.UserSignUpCredentialsSerializer(data=request.data)
