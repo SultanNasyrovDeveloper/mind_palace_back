@@ -1,13 +1,14 @@
 from rest_framework import routers
 
-from mind_palace.palace.node.api.node import MindPalaceNodeViewSet
-from mind_palace.palace.node.api.media import MindPalaceNodeMediaViewSet
+from .api.body import NodeBodyViewSet
+from .api.node import MindPalaceNodeViewSet
+from .api.media import MindPalaceNodeMediaViewSet
 
 
 router = routers.DefaultRouter()
 router.register('nodes/media', MindPalaceNodeMediaViewSet)
+router.register('nodes/bodies', NodeBodyViewSet)
 router.register('nodes', MindPalaceNodeViewSet)
-
 
 
 urlpatterns = router.urls

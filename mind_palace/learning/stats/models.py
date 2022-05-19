@@ -26,6 +26,7 @@ class NodeLearningStatistics(models.Model):
 
     last_repetition = models.DateTimeField(default=datetime.utcnow)
     next_repetition = models.DateTimeField(default=datetime.utcnow)
+    last_view = models.DateTimeField(default=datetime.utcnow)
 
 
 @receiver(models.signals.post_save, sender=MindPalaceNode)

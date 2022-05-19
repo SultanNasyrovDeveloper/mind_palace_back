@@ -1,11 +1,12 @@
-from django.shortcuts import get_object_or_404
+from datetime import datetime
+
+from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from mind_palace.palace.node import models, serializers, filters
-from mind_palace.learning.stats.models import NodeLearningStatistics
 
 
 class MindPalaceNodeViewSet(viewsets.ModelViewSet):
@@ -18,13 +19,21 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
         """
         Updates node views everytime use sees its own node.
         """
-        if not pk:
-            return super().retrieve(request)
-        node = get_object_or_404(models.MindPalaceNode, pk=pk)
-        stats = NodeLearningStatistics.objects.get(node_id=node.id)
-        stats.views += 1
-        stats.save()
+        node = self.get_object()
+        if node.owner_id == request.user.id:
+            node.learning_statistics.views += 1
+            node.learning_statistics.last_view = datetime.utcnow()
+            node.learning_statistics.save()
         return Response(self.serializer_class(node).data)
+
+    def create(self, request, *args, **kwargs):
+        data = dict(request.data)
+        data['owner'] = request.user.id
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
     @action(detail=False, methods=('GET',))
     def tree(self, request, *args, **kwargs):
@@ -33,10 +42,14 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
             raise ValidationError('Root must be specified.')
         depth = request.GET.get('depth', 3)
         root_node = models.MindPalaceNode.objects.get(id=root_id)
-        cached_tree_root = root_node.get_descendants(include_self=True).filter(
-            level__lt=root_node.level + int(depth)
-        ).get_cached_trees()[0]
-        serializer = serializers.MindPalaceTreeNodeSerializer(cached_tree_root)
+        subtree_query = (
+            root_node
+                .get_descendants(include_self=True)
+                .filter(level__lt=root_node.level + int(depth))
+                .select_related('learning_statistics')
+        )
+        cached_subtree = subtree_query.get_cached_trees()[0]
+        serializer = serializers.TreeNodeSerializer(cached_subtree)
         return Response(serializer.data)
 
     @action(

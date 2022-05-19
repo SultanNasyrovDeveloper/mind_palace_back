@@ -12,11 +12,21 @@ class NodeMediaSerializer(serializers.ModelSerializer):
         exclude = ('image', )
 
 
-class NoteTagSerializer(serializers.ModelSerializer):
+class NodeBodySerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.NodeTag
-        fields = '__all__'
+        model = models.NodeBody
+        fields = ('id', 'type', 'meta', 'data')
+
+    def update(self, instance, validated_data):
+        if 'type' in validated_data:
+            validated_data['meta'] = {}
+            validated_data['data'] = {}
+        if 'meta' in validated_data:
+            validated_data['meta'] = {**instance.meta, **validated_data.get('meta', {})}
+        if 'data' in validated_data:
+            validated_data['data'] = {**instance.data, **validated_data.get('data', {})}
+        return super().update(instance, validated_data)
 
 
 class NodeBriefInfoSerializer(serializers.ModelSerializer):
@@ -34,38 +44,29 @@ class MindPalaceNodeSerializer(serializers.ModelSerializer):
     Provide full mind palace node information.
     """
     ancestors = serializers.SerializerMethodField(read_only=True)
-    # TODO: Refactor NoteTagSerializer init params
-    # tags = NoteTagSerializer(many=True, allow_null=True, default=list, read_only=True)
     learning_statistics = UserLearningStatisticsSerializer(read_only=True)
-    # TODO: make media on expand or at other endpoint,
     media = NodeMediaSerializer(many=True, read_only=True)
+    body = NodeBodySerializer(read_only=True)
 
     class Meta:
         model = models.MindPalaceNode
         fields = (
-            'id', 'ancestors', 'learning_statistics', 'media', 'name', 'title', 'body_type',
-            'body', 'children', 'parent'
+            'id', 'ancestors', 'learning_statistics', 'media', 'name', 'title',
+            'children', 'parent', 'owner', 'body'
         )
         read_only_fields = ('children', )
 
-    def get_ancestors(self, neuron):
+    def get_ancestors(self, node):
         """
         Get list of ancestors.
         """
         return [
             {'id': ancestor.id, 'text': ancestor.name}
-            for ancestor in neuron.get_ancestors(include_self=True)
+            for ancestor in node.get_ancestors(include_self=True)
         ]
 
-    def update(self, instance, validated_data):
-        if 'body_type' in validated_data:
-            instance.body = {}
-        if 'body' in validated_data:
-            instance.body.update(validated_data.pop('body'))
-        return super().update(instance, validated_data)
 
-
-class MindPalaceTreeNodeSerializer(serializers.Serializer):
+class TreeNodeSerializer(serializers.Serializer):
 
     parent = serializers.PrimaryKeyRelatedField(read_only=True)
     id = serializers.IntegerField()

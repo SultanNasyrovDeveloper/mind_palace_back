@@ -25,6 +25,6 @@ class UserMindPalace(BaseMindPalace):
 @receiver(post_save, sender=User)
 def create_user_mind_palace(instance, created, **kwargs):
     if created:
-        root_node = MindPalaceNode.objects.create(name='My palace')
+        root_node = MindPalaceNode.objects.create(name='My palace', owner=instance)
         UserMindPalace.objects.create(user=instance, root=root_node)
 

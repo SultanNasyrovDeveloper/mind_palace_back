@@ -5,6 +5,13 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 class BaseMindPalaceNode(MPTTModel):
 
+    owner = models.ForeignKey(
+        'account.User',
+        on_delete=models.CASCADE,
+        related_name='nodes',
+        default=None,
+        null=True
+    )
     parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
