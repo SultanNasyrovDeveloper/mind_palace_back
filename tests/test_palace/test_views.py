@@ -12,3 +12,4 @@ def test_subtree(api_client):
     response = api_client.get(f'/api/v1/palace/palaces/tree/?root={root_node.id}&depth=2')
     print(response.data)
     assert True
+

@@ -35,23 +35,6 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    @action(detail=False, methods=('GET',))
-    def tree(self, request, *args, **kwargs):
-        root_id = request.GET.get('root', None)
-        if not root_id:
-            raise ValidationError('Root must be specified.')
-        depth = request.GET.get('depth', 3)
-        root_node = models.MindPalaceNode.objects.get(id=root_id)
-        subtree_query = (
-            root_node
-                .get_descendants(include_self=True)
-                .filter(level__lt=root_node.level + int(depth))
-                .select_related('learning_statistics')
-        )
-        cached_subtree = subtree_query.get_cached_trees()[0]
-        serializer = serializers.TreeNodeSerializer(cached_subtree)
-        return Response(serializer.data)
-
     @action(
         detail=True,
         methods=('POST', ),
