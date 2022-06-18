@@ -2,8 +2,6 @@ from datetime import datetime
 
 from rest_framework import status
 from rest_framework import viewsets
-from rest_framework.decorators import action
-from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
 from mind_palace.palace.node import models, serializers, filters
@@ -34,16 +32,3 @@ class MindPalaceNodeViewSet(viewsets.ModelViewSet):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    @action(
-        detail=True,
-        methods=('POST', ),
-        serializer_class=serializers.NodeMediaSerializer,
-    )
-    def add_media(self, request, *args, **kwargs):
-        request_data = dict(request.data)
-        request_data['node'] = self.get_object().id
-        serializer = self.get_serializer_class()(data=request_data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)

@@ -1,18 +1,25 @@
 from django.db import models
 
-from mind_palace.palace.node.models import BaseMindPalaceNode
+from mptt.models import MPTTModel, TreeForeignKey
 
 
-class MindPalaceNode(BaseMindPalaceNode):
+class PalaceNode(MPTTModel):
+    
+    owner = models.ForeignKey(
+        'user.User',
+        on_delete=models.CASCADE,
+        related_name='nodes',
+        default=None,
+        null=True
+    )
+    parent = TreeForeignKey(
+        'self',
+        on_delete=models.CASCADE,
+        null=True, blank=True,
+        related_name='children',
+        verbose_name='Parent',
+    )
+    name = models.CharField('Name', max_length=500)
 
-    title = models.TextField('Title', default='', null=True, blank=True)
-    audio = models.FileField('Audio', null=True, blank=True, upload_to='audios/')
+    description = models.TextField('Description', default='', null=True, blank=True)
     tags = models.ManyToManyField('node.NodeTag', verbose_name='Tags')
-
-    def get_owner_id(self):
-        # TODO: Cache or prevent +1 request other way.
-        root_node = self
-        if not self.is_root_node():
-            # TODO: maybe prefetch related mind palace
-            root_node = self.get_root()
-        return root_node.mind_palace.user_id

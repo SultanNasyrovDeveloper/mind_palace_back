@@ -9,7 +9,11 @@ class MindPalaceNodeMedia(models.Model):
 
     Currently, only image or icon or youtube video media available.
     """
-    node = models.ForeignKey('node.MindPalaceNode', on_delete=models.CASCADE, related_name='media')
+    node = models.ForeignKey(
+        'node.MindPalaceNode',
+        on_delete=models.CASCADE,
+        related_name='media'
+    )
     type = models.CharField(
         max_length=100,
         choices=NodeMediaTypeEnum.choices(),

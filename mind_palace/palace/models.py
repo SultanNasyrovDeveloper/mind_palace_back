@@ -9,7 +9,11 @@ from mind_palace.palace.node.models import MindPalaceNode
 class BaseMindPalace(models.Model):
 
     root = models.OneToOneField(
-        'node.MindPalaceNode', on_delete=models.SET_DEFAULT, default=None, null=True, blank=True,
+        'node.MindPalaceNode',
+        on_delete=models.SET_DEFAULT,
+        default=None,
+        null=True,
+        blank=True,
         related_name='mind_palace'
     )
 
@@ -19,7 +23,11 @@ class BaseMindPalace(models.Model):
 
 class UserMindPalace(BaseMindPalace):
 
-    user = models.OneToOneField('user.User', on_delete=models.CASCADE, related_name='mypalace')
+    user = models.OneToOneField(
+        'user.User',
+        on_delete=models.CASCADE,
+        related_name='mind_palace'
+    )
 
 
 @receiver(post_save, sender=User)
