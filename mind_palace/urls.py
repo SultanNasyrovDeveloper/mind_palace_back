@@ -14,7 +14,7 @@ urlpatterns = [
     path('api/v1/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     path('api/v1/application/', include('mind_palace.application.urls')),
-    path('api/v1/account/', include('mind_palace.account.urls')),
+    path('api/v1/user/', include('mind_palace.user.urls')),
     path('api/v1/palace/', include('mind_palace.palace.node.urls')),
     path('api/v1/palace/', include('mind_palace.palace.urls')),
     path('api/v1/learning/sessions/', include('mind_palace.learning.session.urls')),

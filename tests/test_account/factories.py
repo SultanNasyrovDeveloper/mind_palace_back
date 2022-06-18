@@ -1,7 +1,7 @@
 import factory
 import faker
 
-from mind_palace.account import models
+from mind_palace.user import models
 
 
 class UserFactory(factory.django.DjangoModelFactory):

@@ -6,7 +6,7 @@ from mptt.models import MPTTModel, TreeForeignKey
 class BaseMindPalaceNode(MPTTModel):
 
     owner = models.ForeignKey(
-        'account.User',
+        'user.User',
         on_delete=models.CASCADE,
         related_name='nodes',
         default=None,

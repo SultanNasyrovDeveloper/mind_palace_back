@@ -4,7 +4,7 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
-from mind_palace.account import serializers, models
+from mind_palace.user import serializers, models
 
 
 class SignUpView(views.APIView):

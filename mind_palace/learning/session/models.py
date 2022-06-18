@@ -19,7 +19,7 @@ class UserLearningSession(models.Model):
         default=UserLearningSessionStatusEnum.active,
     )
     user = models.ForeignKey(
-        'account.User', on_delete=models.CASCADE, related_name='learning_sessions',
+        'user.User', on_delete=models.CASCADE, related_name='learning_sessions',
     )
     strategy_name = models.CharField(
         max_length=1000, choices=MindPalaceLearningStrategiesEnum.choices(),

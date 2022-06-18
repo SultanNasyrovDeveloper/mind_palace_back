@@ -2,7 +2,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
-from mind_palace.account.models import User
+from mind_palace.user.models import User
 from mind_palace.palace.node.models import MindPalaceNode
 
 
@@ -19,7 +19,7 @@ class BaseMindPalace(models.Model):
 
 class UserMindPalace(BaseMindPalace):
 
-    user = models.OneToOneField('account.User', on_delete=models.CASCADE, related_name='mypalace')
+    user = models.OneToOneField('user.User', on_delete=models.CASCADE, related_name='mypalace')
 
 
 @receiver(post_save, sender=User)

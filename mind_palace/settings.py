@@ -9,7 +9,7 @@ SECRET_KEY = 'django-insecure-ya*p^u73z6(s##*w#emo^%7w#_+ubb+y9qx3ov7ti@w$talz(i
 BASE_DIR = Path(__file__).resolve().parent.parent
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
-AUTH_USER_MODEL = 'account.User'
+AUTH_USER_MODEL = 'user.User'
 CSRF_COOKIE_SECURE = False
 APPEND_SLASH = True
 
@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'django_filters',
 
     'mind_palace.application',
-    'mind_palace.account',
+    'mind_palace.user',
     'mind_palace.palace',
     'mind_palace.palace.node',
     'mind_palace.learning',

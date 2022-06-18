@@ -14,6 +14,7 @@ class UserSignUpCredentialsSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+
     mind_palace_root = serializers.IntegerField(source='mypalace.root_id')
 
     class Meta:

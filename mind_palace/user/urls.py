@@ -1,7 +1,7 @@
 from rest_framework import routers
 from django.urls import path
 
-from mind_palace.account import views
+from mind_palace.user import views
 
 
 router = routers.DefaultRouter()
