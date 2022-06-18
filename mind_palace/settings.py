@@ -38,7 +38,7 @@ INSTALLED_APPS = [
 
 
 # APPLICATION SETTING
-USER_LEARNING_SESSION_EXPIRE = 30  # Currently in minutes
+USER_LEARNING_SESSION_EXPIRE = 30  # In minutes
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -59,9 +59,9 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.IsAuthenticated',
+    # ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 20
 }
@@ -122,8 +122,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('POSTGRES_DB', 'mind_palace'),
-        'USER': os.environ.get('POSTGRES_USER', 'developer'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '123456'),
+        'USER': os.environ.get('POSTGRES_USER', 'mind_palace'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '1Qetuwry'),
         'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
         'PORT': 5432,
     }
