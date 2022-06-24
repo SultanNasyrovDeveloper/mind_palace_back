@@ -3,14 +3,14 @@ from django.db import models
 from mind_palace.palace.node.enums import NodeMediaTypeEnum
 
 
-class MindPalaceNodeMedia(models.Model):
+class Media(models.Model):
     """
     Responsible for storing one media object with image or other king of media.
 
     Currently, only image or icon or youtube video media available.
     """
     node = models.ForeignKey(
-        'node.MindPalaceNode',
+        'node.PalaceNode',
         on_delete=models.CASCADE,
         related_name='media'
     )

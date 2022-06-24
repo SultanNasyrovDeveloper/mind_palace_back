@@ -1,12 +1,12 @@
-from mind_palace.palace.node.models.body import NodeBody
-from mind_palace.palace.node.models.tag import NodeTag
-from mind_palace.palace.node.models.node import MindPalaceNode
-from mind_palace.palace.node.models.media import MindPalaceNodeMedia
+from mind_palace.palace.node.models.body import Body
+from mind_palace.palace.node.models.tag import Tag
+from mind_palace.palace.node.models.node import PalaceNode
+from mind_palace.palace.node.models.media import Media
 
 
 __all__ = [
-    'NodeTag',
-    'MindPalaceNode',
-    'MindPalaceNodeMedia',
-    'NodeBody'
+    'Tag',
+    'PalaceNode',
+    'Media',
+    'Body'
 ]

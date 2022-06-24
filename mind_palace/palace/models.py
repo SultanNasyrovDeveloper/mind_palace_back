@@ -3,13 +3,13 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from mind_palace.user.models import User
-from mind_palace.palace.node.models import MindPalaceNode
+from mind_palace.palace.node.models import PalaceNode
 
 
 class BaseMindPalace(models.Model):
 
     root = models.OneToOneField(
-        'node.MindPalaceNode',
+        'node.PalaceNode',
         on_delete=models.SET_DEFAULT,
         default=None,
         null=True,
@@ -33,6 +33,6 @@ class UserMindPalace(BaseMindPalace):
 @receiver(post_save, sender=User)
 def create_user_mind_palace(instance, created, **kwargs):
     if created:
-        root_node = MindPalaceNode.objects.create(name='My palace', owner=instance)
+        root_node = PalaceNode.objects.create(name='My palace', owner=instance)
         UserMindPalace.objects.create(user=instance, root=root_node)
 

@@ -22,4 +22,4 @@ class PalaceNode(MPTTModel):
     name = models.CharField('Name', max_length=500)
 
     description = models.TextField('Description', default='', null=True, blank=True)
-    tags = models.ManyToManyField('node.NodeTag', verbose_name='Tags')
+    tags = models.ManyToManyField('node.Tag', verbose_name='Tags')

@@ -14,7 +14,7 @@ class NodeBriefInfoSerializer(serializers.ModelSerializer):
     """
 
     class Meta:
-        model = models.MindPalaceNode
+        model = models.PalaceNode
         fields = ('id', 'name', 'parent')
 
 
@@ -28,9 +28,9 @@ class MindPalaceNodeSerializer(serializers.ModelSerializer):
     body = NodeBodySerializer(read_only=True)
 
     class Meta:
-        model = models.MindPalaceNode
+        model = models.PalaceNode
         fields = (
-            'id', 'ancestors', 'learning_statistics', 'media', 'name', 'title',
+            'id', 'ancestors', 'learning_statistics', 'media', 'name', 'description',
             'children', 'parent', 'owner', 'body'
         )
         read_only_fields = ('children', )
@@ -40,7 +40,7 @@ class MindPalaceNodeSerializer(serializers.ModelSerializer):
         Get list of ancestors.
         """
         return [
-            {'id': ancestor.id, 'text': ancestor.name}
+            {'id': ancestor.id, 'name': ancestor.name}
             for ancestor in node.get_ancestors(include_self=True)
         ]
 

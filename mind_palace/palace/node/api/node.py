@@ -9,7 +9,7 @@ from mind_palace.palace.node import models, serializers, filters
 
 class MindPalaceNodeViewSet(viewsets.ModelViewSet):
 
-    queryset = models.MindPalaceNode.objects.all()
+    queryset = models.PalaceNode.objects.all()
     serializer_class = serializers.MindPalaceNodeSerializer
     filterset_class = filters.MindPalaceNodeFilter
 

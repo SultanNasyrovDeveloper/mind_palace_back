@@ -6,8 +6,8 @@ from mind_palace.palace.node import models
 class NodeBodySerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.NodeBody
-        fields = ('id', 'type', 'meta', 'data')
+        model = models.Body
+        fields = ('id', 'type', 'meta', 'data', 'node_id')
 
     def update(self, instance, validated_data):
         if 'type' in validated_data:

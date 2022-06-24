@@ -4,13 +4,13 @@ from django.db.models.signals import post_save
 
 from mind_palace.palace.node.enums import NodeBodyTypeEnum
 
-from .node import MindPalaceNode
+from .node import PalaceNode
 
 
-class NodeBody(models.Model):
+class Body(models.Model):
 
     node = models.OneToOneField(
-        MindPalaceNode,
+        'node.PalaceNode',
         on_delete=models.CASCADE,
         related_name='body'
     )
@@ -23,7 +23,7 @@ class NodeBody(models.Model):
     data = models.JSONField(default=dict)
 
 
-@receiver(post_save, sender=MindPalaceNode)
+@receiver(post_save, sender=PalaceNode)
 def create_node_body(instance, created, **kwargs):
     if created:
-        NodeBody.objects.create(node=instance)
+        Body.objects.create(node=instance)

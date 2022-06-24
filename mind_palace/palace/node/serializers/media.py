@@ -6,5 +6,5 @@ from mind_palace.palace.node import models
 class NodeMediaSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.MindPalaceNodeMedia
+        model = models.Media
         exclude = ('image', )

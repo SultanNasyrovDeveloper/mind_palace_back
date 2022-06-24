@@ -27,7 +27,7 @@ class UserLearningSession(models.Model):
     )
 
     # nodes
-    root = models.ForeignKey('node.MindPalaceNode', on_delete=models.CASCADE)
+    root = models.ForeignKey('node.PalaceNode', on_delete=models.CASCADE)
     queue = ArrayField(models.IntegerField(), default=list)
 
     # statistics

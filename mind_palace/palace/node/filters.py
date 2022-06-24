@@ -4,6 +4,7 @@ from mind_palace.palace.node import models
 
 
 class MindPalaceNodeFilter(filters.FilterSet):
+
     class Meta:
-        model = models.MindPalaceNode
-        fields = {'title': ('icontains', )}
+        model = models.PalaceNode
+        fields = {'description': ('icontains', )}

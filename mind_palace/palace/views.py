@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from mind_palace.palace import models, serializers
-from mind_palace.palace.node.models import MindPalaceNode
+from mind_palace.palace.node.models import PalaceNode
 from mind_palace.palace.node.serializers import TreeNodeSerializer
 
 
@@ -19,7 +19,7 @@ class UserMindPalaceViewSet(ModelViewSet):
         if not root_id:
             raise ValidationError('Root must be specified.')
         depth = request.GET.get('depth', 3)
-        root_node = MindPalaceNode.objects.get(id=root_id)
+        root_node = PalaceNode.objects.get(id=root_id)
         subtree_query = (
             root_node
                 .get_descendants(include_self=True)
@@ -38,5 +38,5 @@ class UserMindPalaceViewSet(ModelViewSet):
     def move_node(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        MindPalaceNode.objects.move_node(**serializer.validated_data)
+        PalaceNode.objects.move_node(**serializer.validated_data)
         return Response()

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from mind_palace.palace import models
-from mind_palace.palace.node.models import MindPalaceNode
+from mind_palace.palace.node.models import PalaceNode
 
 from .enums import MoveToPositionChoices
 
@@ -16,10 +16,10 @@ class UserMindPalaceSerializer(serializers.ModelSerializer):
 class PalaceNodeMoveDataSerializer(serializers.Serializer):
 
     node = serializers.PrimaryKeyRelatedField(
-        queryset=MindPalaceNode.objects.all()
+        queryset=PalaceNode.objects.all()
     )
     target = serializers.PrimaryKeyRelatedField(
-        queryset=MindPalaceNode.objects.all()
+        queryset=PalaceNode.objects.all()
     )
     position = serializers.ChoiceField(
         choices=MoveToPositionChoices.choices()

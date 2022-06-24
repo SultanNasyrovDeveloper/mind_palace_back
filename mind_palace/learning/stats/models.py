@@ -4,13 +4,13 @@ from django.db import models
 from django.dispatch import receiver
 
 from mind_palace.learning.stats.enums import UserNodeLearningStatusEnum
-from mind_palace.palace.node.models import MindPalaceNode
+from mind_palace.palace.node.models import PalaceNode
 
 
 class NodeLearningStatistics(models.Model):
 
     node = models.OneToOneField(
-        'node.MindPalaceNode', on_delete=models.CASCADE, related_name='learning_statistics',
+        'node.PalaceNode', on_delete=models.CASCADE, related_name='learning_statistics',
     )
 
     status = models.CharField(
@@ -29,7 +29,7 @@ class NodeLearningStatistics(models.Model):
     last_view = models.DateTimeField(default=datetime.utcnow)
 
 
-@receiver(models.signals.post_save, sender=MindPalaceNode)
+@receiver(models.signals.post_save, sender=PalaceNode)
 def create_palace_node(sender, instance, created, **kwargs):
     if created:
         NodeLearningStatistics.objects.create(node=instance)
